@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Crux
 
-## Getting Started
+Crux is a climbing community app for sharing climbs, finding partners, and discovering routes and gyms. The current project includes the homepage and local PostgreSQL schema; the app is not yet connected to the database through an API.
 
-First, run the development server:
+## Requirements
+
+- Node.js and npm
+- PostgreSQL installed and running locally
+- pgAdmin 4 (for managing the database visually)
+
+## Set up the local database
+
+The database scripts are in the `database` folder. They create a `users` table and a `posts` table, with each post linked to its author.
+
+1. Open pgAdmin 4 and connect to your local PostgreSQL server.
+2. In the Browser panel, right-click **Databases** and choose **Create → Database…**. Name it `climbing_app`.
+3. Expand **Databases**, then right-click `climbing_app` and choose **Query Tool**.
+4. In the Query Tool, press **Ctrl+O** and open `database/schema.sql` from this project. Press **F5** to run it.
+5. To add sample data, press **Ctrl+O** again, open `database/seed.sql`, and press **F5**.
+6. In the Browser panel, right-click **Schemas → public → Tables** and choose **Refresh**. You should see `users` and `posts`.
+
+The schema and seed scripts are safe to run again. The seed script creates three demo users and four demo climbing posts.
+
+## Run the web app
+
+Install the project dependencies, then start the Next.js development server:
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000). PostgreSQL can be running independently; the current homepage uses sample data in code and does not query the database yet.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `npm run dev` — start the local development server
+- `npm run lint` — check code style
+- `npm run build` — create a production build
